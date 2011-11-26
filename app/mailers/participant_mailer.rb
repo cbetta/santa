@@ -4,7 +4,8 @@ class ParticipantMailer < ActionMailer::Base
   
   def pick_email(pick)
     @url = pick_url(pick.hash)
-    mail(:to => pick.picker.email, :subject => "Your pick!")
+    @pick = pick
+    mail(:to => pick.picker.email, :subject => "#{pick.draw.user.name} invites you to \"#{pick.draw.title}\"")
   end
   
   

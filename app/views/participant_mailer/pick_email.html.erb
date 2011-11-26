@@ -4,9 +4,13 @@
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
   </head>
   <body>
-    <h1>Here is your pick!</h1>
+    <h2>Hi <%= @pick.picker.name %>,</h2>
     <p>
-      <%= link_to "Click here to see your pick!", @url %>
+      <%= @pick.draw.user.name %> has made a secret santa draw for you.
+    </p>
+    
+    <p>
+      <%= link_to "Click here to see who you have!", @url %>
     </p>
     
   </body>

@@ -4,7 +4,7 @@
   &nbsp;|&nbsp;
   <%= link_to 'Edit draw', edit_draw_path(@draw), :class => "button edit small" %> 
   <%= link_to 'Delete draw', @draw, confirm: 'Are you sure?', :class => "button delete small", method: :delete %>
-  <%= link_to 'Make a the draw', make_draw_path(@draw),  :class => "button star small",  method: :post, confirm: "Are you sure? This can not be undone. You can not add any more participants after this." %>
+  <%= link_to 'Make the draw', make_draw_path(@draw),  :class => "button star small",  method: :post, confirm: "Are you sure? This can not be undone. You can not add any more participants after this." %>
 <% end %>
 
 <br/>

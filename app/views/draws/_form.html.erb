@@ -12,12 +12,12 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :title %>
-    <%= f.text_field :title %>
+    <%= f.label :title, "Secret Santa name" %>
+    <%= f.text_field :title, :placeholder => "e.g. The Smith's Family Secret Santa" %>
   </div>
   <div class="field">
-    <%= f.label :message %>
-    <%= f.text_area :message %>
+    <%= f.label :message, "A little message or description" %>
+    <%= f.text_area :message, :placeholder => "I've setup this secret santa, you are all invited..." %>
   </div>
   
   <br/>

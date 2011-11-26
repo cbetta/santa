@@ -114,4 +114,12 @@ a {
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b7ad70', endColorstr='#d5cea6',GradientType=0 ); /* IE6-9 */
     border-top: 5px solid #ddd;
     min-height: 300px;
+    font-family: Arial, sans-serif;
+    color: #fff;
+    font-size: 13px;
+    padding: 10px 0px;
+    
+    a {
+        color: #ddd;
+    }
 }
