@@ -1,4 +1,4 @@
-<h2>Add an participant</h2>
+<h2>Add a friend or family member</h2>
 <% participant = @draw.participants.build %>
 <%= form_for(participant, remote: true) do |f| %>
   <div id='participant_errors'>
@@ -7,7 +7,7 @@
   
   <%= f.hidden_field :draw_id %>
 
-    <%= f.text_field :name, placeholder: "name" %>
-    <%= f.text_field :email, placeholder: "email" %>
-    <%= f.submit "add" %>
+    <%= f.text_field :name, placeholder: "name", :class => "inline" %>
+    <%= f.text_field :email, placeholder: "email", :class => "inline" %>
+    <%= f.submit "add", :class => "button" %>
 <% end %>

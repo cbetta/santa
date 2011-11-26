@@ -1,15 +1,32 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Santa</title>
-  <%= stylesheet_link_tag    "application" %>
-  <%= javascript_include_tag "application" %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
-  <%= render :partial => "header" %>
-  <%= render :partial => "flash", :locals => {flash: flash} %>
-<%= yield %>
-
-</body>
+  <head>
+    <title>A Simple Secret Santa app</title>
+    <%= stylesheet_link_tag    "application" %>
+    <%= javascript_include_tag "application" %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body id="<%= body_id %>">
+    <%= render :partial => "flash", :locals => {flash: flash} %>
+    
+    
+    <div id="header" class='outside'>
+      <div class='inside'>
+        <%= render :partial => "header" %>
+        <%= yield :subheader %>
+      </div>
+    </div>
+      
+    <div id="content" class='outside'>
+      <div class='inside'>
+        <%= yield %>
+      </div>
+    </div>
+    
+    <div id="footer" class='outside'>
+      <div class='inside'>
+        <%= yield :footer %>
+      </div>
+    </div>
+  </body>
 </html>

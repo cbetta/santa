@@ -1,3 +1,4 @@
-<div id="participant<%= participant.id %>">
-  <%= link_to participant.name, "mailto:#{participant.email}" %> <%= link_to "[x]", participant, method: :delete, remote: true, confirm: "Are you sure you want to remove this participant?" %>
-</div>
+<tr id="participant<%= participant.id %>">
+  <td><strong><%= "#{participant.name} (#{participant.email})" %></strong></td>
+  <td class='narrow'><%= link_to "remove", participant, :class => "button tiny delete", method: :delete, remote: true, confirm: "Are you sure you want to remove this participant?" %></td>
+</tr>

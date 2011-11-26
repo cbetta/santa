@@ -1,6 +1,6 @@
 <% if (@participant.valid?) %>
     $("#participants").append("<%= escape_javascript(render :partial => 'participants/participant', :locals => {:participant => @participant}) %>");
-    $("#participants div:last-child").effect("highlight", {}, 2000);
+    $("#participants tr:last-child").effect("highlight", {}, 2000);
     $("#participant_name").val("");
     $("#participant_name").focus();
     $("#participant_email").val("");

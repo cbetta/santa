@@ -2,20 +2,116 @@
  * This is a manifest file that'll automatically include all the stylesheets available in this directory
  * and any sub-directories. You're free to add application-wide styles to this file and they'll appear at
  * the top of the compiled file, but it's generally better to create a new file per style scope.
+ *= require reset
+ *= require buttons
+ *= require form
  *= require_self
- *= require_tree . 
+ *= require draws
 */
+@import url(http://fonts.googleapis.com/css?family=Merienda+One);
+
+body {
+    background-color: rgb(213,206,166);
+}
+
+a {
+    color: #840221;
+}
 
 .hidden {
     display: none;
 }
 
+.pull_right {
+    text-align: right;
+}
+
+.pull_center {
+    text-align: center;
+}
+
 #flash {
     position: fixed;
-    background-color: rgba(0,0,0,0.6);
+    background: #840221; /* Old browsers */
+    background: -moz-linear-gradient(top,  #840221 0%, #70021b 44%, #560014 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#840221), color-stop(44%,#70021b), color-stop(100%,#560014)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  #840221 0%,#70021b 44%,#560014 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  #840221 0%,#70021b 44%,#560014 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  #840221 0%,#70021b 44%,#560014 100%); /* IE10+ */
+    background: linear-gradient(top,  #840221 0%,#70021b 44%,#560014 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#840221', endColorstr='#560014',GradientType=0 ); /* IE6-9 */
+    text-align: center;
     top: 0px;
     width: 100%;
     left: 0px;
-    padding: 10px;
+    padding: 10px 0px 15px 0px;
     color: #fff;
+    z-index: 100;
+    font-family: 'Merienda One', cursive;
+    font-size: 22px;
+}
+
+.inside {
+    width: 800px;
+    padding: 0px 10px;
+    margin: 0px auto;
+}
+
+#header {
+    font-family: 'Merienda One', cursive;
+    padding: 10px 0px 15px 0px;
+    background: #a90329; /* Old browsers */
+    background: -moz-linear-gradient(top,  #a90329 0%, #8f0222 44%, #6d0019 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#a90329), color-stop(44%,#8f0222), color-stop(100%,#6d0019)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  #a90329 0%,#8f0222 44%,#6d0019 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  #a90329 0%,#8f0222 44%,#6d0019 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  #a90329 0%,#8f0222 44%,#6d0019 100%); /* IE10+ */
+    background: linear-gradient(top,  #a90329 0%,#8f0222 44%,#6d0019 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a90329', endColorstr='#6d0019',GradientType=0 ); /* IE6-9 */
+    border-bottom: 5px solid #ddd;
+    
+    
+    a {
+        color: #fff;
+        font-size: 22px;
+        text-decoration: none;
+    }
+
+    .navigation {
+        float: right;
+        position: relative;
+        top: 4px;
+        
+        a {
+            font-size: 16px;
+            text-decoration: underline;
+        }
+    }
+}
+
+#content {
+    background: rgb(237,237,237); /* Old browsers */
+    background: -moz-linear-gradient(top,  rgba(237,237,237,1) 0%, rgba(246,246,246,1) 53%, rgba(255,255,255,1) 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(237,237,237,1)), color-stop(53%,rgba(246,246,246,1)), color-stop(100%,rgba(255,255,255,1))); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  rgba(237,237,237,1) 0%,rgba(246,246,246,1) 53%,rgba(255,255,255,1) 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  rgba(237,237,237,1) 0%,rgba(246,246,246,1) 53%,rgba(255,255,255,1) 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  rgba(237,237,237,1) 0%,rgba(246,246,246,1) 53%,rgba(255,255,255,1) 100%); /* IE10+ */
+    background: linear-gradient(top,  rgba(237,237,237,1) 0%,rgba(246,246,246,1) 53%,rgba(255,255,255,1) 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ededed', endColorstr='#ffffff',GradientType=0 ); /* IE6-9 */
+    font-size: 16px;
+    padding: 40px 0px;
+    font-family: Arial, sans-serif;
+}
+
+#footer {
+    background: rgb(183,173,112); /* Old browsers */
+    background: -moz-linear-gradient(top,  rgba(183,173,112,1) 0%, rgba(201,193,144,1) 60%, rgba(213,206,166,1) 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(183,173,112,1)), color-stop(60%,rgba(201,193,144,1)), color-stop(100%,rgba(213,206,166,1))); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  rgba(183,173,112,1) 0%,rgba(201,193,144,1) 60%,rgba(213,206,166,1) 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  rgba(183,173,112,1) 0%,rgba(201,193,144,1) 60%,rgba(213,206,166,1) 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  rgba(183,173,112,1) 0%,rgba(201,193,144,1) 60%,rgba(213,206,166,1) 100%); /* IE10+ */
+    background: linear-gradient(top,  rgba(183,173,112,1) 0%,rgba(201,193,144,1) 60%,rgba(213,206,166,1) 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b7ad70', endColorstr='#d5cea6',GradientType=0 ); /* IE6-9 */
+    border-top: 5px solid #ddd;
+    min-height: 300px;
 }

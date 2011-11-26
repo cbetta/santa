@@ -1,3 +1,82 @@
 // Place all the styles related to the Draws controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+#draws, #picks, #users {
+    h1 {
+        font-family: 'Merienda One', cursive;
+        font-size: 26px;
+        margin-bottom: 10px;
+    }
+    
+    h2 {
+        font-family: 'Merienda One', cursive;
+        font-size: 20px;
+        margin: 20px 0px 10px 0px;
+    }
+    
+    table {
+        width: 100%;
+        border-top: 1px solid #ddd;
+        
+        tr {
+            color: #888;
+            background-color:#fff;
+            border-bottom: 1px solid #ddd;
+
+            &:nth-child(odd) {
+                background-color: #fafafa;
+            }
+            
+            td {
+                padding: 10px 7px;
+                
+                &.narrow {
+                    width: 100px;
+                    text-align: right;
+                }
+                
+                strong {
+                    color: #000;
+                }
+            }
+        }
+    }
+    
+    .notice {
+        font-size: 20px;
+        margin: 20px 0px;
+        padding: 10px;
+        background-color: #fff;
+        border-top: 1px solid #ddd;
+        border-bottom: 1px solid #ddd;
+    }
+    
+    .message {
+        font-size: 18px;
+        width: 700px;
+        color: #333;
+        line-height: 24px;
+        margin-bottom: 10px;
+        
+        h1 {
+            font-size: 20px;
+        }
+        
+        h2 {
+            font-size: 18px;
+        }
+        
+        ul {
+            margin: 10px 15px;
+            line-height: 20px;
+            list-style: disc outside;
+        }
+        
+        ol {
+            margin: 10px 15px;
+            line-height: 20px;
+            list-style: decimal outside;
+        }
+    }
+}

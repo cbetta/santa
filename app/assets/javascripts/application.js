@@ -11,6 +11,6 @@
 
 $(document).ready(function(){
     if ($("#flash").length) {
-        setTimeout(function(){$("#flash").slideUp();}, 1000);
+        setTimeout(function(){$("#flash").slideUp();}, 2000);
     } 
 });

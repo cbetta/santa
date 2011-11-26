@@ -1,32 +1,35 @@
-<p>
-  <b>Title:</b>
-  <%= @draw.title %>
-</p>
-
-<p>
-  <b>Message:</b>
-  <%= @draw.message %>
-</p>
+<%= link_to 'View all', draws_path, :class => "button small"  %> 
 
 <% unless @draw.drawn %>
-  <div id='participants'>
+  &nbsp;|&nbsp;
+  <%= link_to 'Edit draw', edit_draw_path(@draw), :class => "button edit small" %> 
+  <%= link_to 'Delete draw', @draw, confirm: 'Are you sure?', :class => "button delete small", method: :delete %>
+  <%= link_to 'Make a the draw', make_draw_path(@draw),  :class => "button star small",  method: :post, confirm: "Are you sure? This can not be undone. You can not add any more participants after this." %>
+<% end %>
+
+<br/>
+<br/>
+
+<h1><%= @draw.title %></h1>
+
+<div class='message'>
+  <%= RedCloth.new(@draw.message).to_html.html_safe %>
+</div>
+
+<% unless @draw.drawn %>
+<h2>Friends and family</h2>
+<table id='participants'>
     <% if @draw.participants.count > 0 %>
-      <h2>Participants</h2>
-      <%= render @draw.participants.order("name ASC") %>
+        <%= render @draw.participants.order("name ASC") %>
     <% end %>
-  </div>
+</table>
   
   <%= render "participants/form" %>
   
 <% else %>
-  <div id='picks'>
-    <h2>Picks</h2>
+<h2>Status</h2>
+<table id='picks'>
     <%= render @draw.picks.order("id ASC") %>
-  </div>
+</table>
 <% end %>
-
-
-<%= link_to 'Edit', edit_draw_path(@draw) unless @draw.drawn %> |
-<%= link_to 'Back', draws_path %> |
-<%= link_to 'Make a the draw', make_draw_path(@draw), method: :post, confirm: "Are you sure? This can not be undone. You can not add any more participants after this." unless @draw.drawn %>
 

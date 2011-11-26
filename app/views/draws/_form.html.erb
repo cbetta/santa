@@ -12,19 +12,21 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :title %><br />
+    <%= f.label :title %>
     <%= f.text_field :title %>
   </div>
   <div class="field">
-    <%= f.label :message %><br />
+    <%= f.label :message %>
     <%= f.text_area :message %>
   </div>
   
+  <br/>
   
-  
-  <div class="actions">
-    <%= f.submit "Create and add participants" if @draw.new_record? %>
-    <%= f.submit "Update" unless @draw.new_record? %>
+  <div class="pull_right">
+    <%= link_to "Cancel", root_url, :class => "button small delete"  if @draw.new_record?  %>
+    <%= link_to "Cancel", @draw, :class => "button small delete"  unless @draw.new_record?  %>
     
+    <%= f.submit "Create and add participants", :class => "button small save" if @draw.new_record? %>
+    <%= f.submit "Update", :class => "button small save"  unless @draw.new_record? %>
   </div>
 <% end %>

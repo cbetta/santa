@@ -1,6 +1,10 @@
-<div>
-  You: <%= @pick.picker.name %>
+<h1><%= @pick.draw.title %></h1>
+
+<div class='notice'>
+  You (<%= @pick.picker.name %>) have <%= @pick.picked.name %> for secret santa
 </div>
-<div>
-  Pick: <%= @pick.picked.name %>
+
+<h2>Message from <%= @pick.draw.user.name %></h2>
+<div class='message '>
+  <%= RedCloth.new(@pick.draw.message).to_html.html_safe %>
 </div>
