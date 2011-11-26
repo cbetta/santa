@@ -16,4 +16,3 @@
 
 .rvmrc
 config/database.yml
-Procfile
