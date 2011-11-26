@@ -1,0 +1,4 @@
+$("#participant<%= @participant.id %>").slideUp();
+$("#flash").text("Participant removed");
+$("#flash").slideDown();
+setTimeout(function(){$("#flash").slideUp();}, 2000);

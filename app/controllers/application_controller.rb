@@ -1,8 +1,9 @@
 class ApplicationController < ActionController::Base
-  protect_from_forgery
-  #keep this at the top
+  #keep this at the top at all times
   before_filter :load_user
   
+  protect_from_forgery
+
   before_filter :require_login
   
   helper_method :current_user, :logged_in?
@@ -11,7 +12,10 @@ private
   
   def require_login
     session[:redirect] = request.url
-    redirect_to new_user_path unless logged_in?
+    unless logged_in?
+      flash.keep
+      redirect_to login_path 
+    end
   end
   
   def current_user
@@ -33,15 +37,16 @@ private
     if session[:redirect] && session[:redirect].starts_with?(root_url)
       redirect  = session[:redirect]
       session[:redirect] = nil
-      redirect_to redirect
+      redirect_to redirect, notice: "You are now logged in"
     else 
-      redirect_to target
+      redirect_to target,  notice: "You are now logged in"
     end
   end
   
   def logout(target=nil)
     session.delete(:user)
-    redirect_to(target || root_url)
+    target ||= root_url
+    redirect_to(target, notice: "You are now logged out")
   end
 
 end

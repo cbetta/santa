@@ -5,3 +5,17 @@
  *= require_self
  *= require_tree . 
 */
+
+.hidden {
+    display: none;
+}
+
+#flash {
+    position: fixed;
+    background-color: rgba(0,0,0,0.6);
+    top: 0px;
+    width: 100%;
+    left: 0px;
+    padding: 10px;
+    color: #fff;
+}

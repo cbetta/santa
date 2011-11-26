@@ -9,7 +9,7 @@ Santa::Application.routes.draw do
 
   resources :users
 
-  match "/login" => redirect("/auth/twitter")
+  match "/login" => "users#new", :as => "login"
   match "/logout" => "users#destroy"
   match "/auth/:provider/callback" => "users#create"
   root :to => 'draws#new'

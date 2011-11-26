@@ -1,0 +1,4 @@
+<% message = flash[:notice] || flash[:alert] %>
+<div id="flash" class="<%= "hidden" if message.blank? %>">
+  <%= message %>
+</div>

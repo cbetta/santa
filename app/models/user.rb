@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   has_many :connections
+  has_many :draws
   
   def self.authenticate_or_create_with(auth)
     c = Connection.find_or_create_by_uid_and_provider(auth["uid"], auth["provider"])

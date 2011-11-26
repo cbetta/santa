@@ -1,83 +1,14 @@
 class ParticipantsController < ApplicationController
-  # GET /participants
-  # GET /participants.json
-  def index
-    @participants = Participant.all
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @participants }
-    end
-  end
-
-  # GET /participants/1
-  # GET /participants/1.json
-  def show
-    @participant = Participant.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @participant }
-    end
-  end
-
-  # GET /participants/new
-  # GET /participants/new.json
-  def new
-    @participant = Participant.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @participant }
-    end
-  end
-
-  # GET /participants/1/edit
-  def edit
-    @participant = Participant.find(params[:id])
-  end
-
-  # POST /participants
-  # POST /participants.json
   def create
-    @participant = Participant.new(params[:participant])
-
-    respond_to do |format|
-      if @participant.save
-        format.html { redirect_to @participant, notice: 'Participant was successfully created.' }
-        format.json { render json: @participant, status: :created, location: @participant }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @participant.errors, status: :unprocessable_entity }
-      end
-    end
+    @draw = current_user.draws.find(params[:participant][:draw_id])
+    @participant = @draw.participants.build(params[:participant])
+    @participant.save
   end
 
-  # PUT /participants/1
-  # PUT /participants/1.json
-  def update
-    @participant = Participant.find(params[:id])
-
-    respond_to do |format|
-      if @participant.update_attributes(params[:participant])
-        format.html { redirect_to @participant, notice: 'Participant was successfully updated.' }
-        format.json { head :ok }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @participant.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # DELETE /participants/1
-  # DELETE /participants/1.json
   def destroy
     @participant = Participant.find(params[:id])
-    @participant.destroy
-
-    respond_to do |format|
-      format.html { redirect_to participants_url }
-      format.json { head :ok }
-    end
+    raise "Access denied" if @participant.draw.user != current_user
+    @participant.delete
   end
 end

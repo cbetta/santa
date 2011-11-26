@@ -1,46 +1,26 @@
 class DrawsController < ApplicationController
-  # GET /draws
-  # GET /draws.json
+
   def index
-    @draws = Draw.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @draws }
-    end
+    @draws = current_user.draws
   end
 
-  # GET /draws/1
-  # GET /draws/1.json
   def show
-    @draw = Draw.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @draw }
-    end
+    @draw = current_user.draws.find(params[:id])
   end
 
-  # GET /draws/new
-  # GET /draws/new.json
   def new
-    @draw = Draw.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @draw }
-    end
+    @draw = current_user.draws.new
   end
 
   # GET /draws/1/edit
   def edit
-    @draw = Draw.find(params[:id])
+    @draw = current_user.draws.find(params[:id])
   end
 
   # POST /draws
   # POST /draws.json
   def create
-    @draw = Draw.new(params[:draw])
+    @draw = current_user.draws.build(params[:draw])
 
     respond_to do |format|
       if @draw.save
@@ -56,7 +36,7 @@ class DrawsController < ApplicationController
   # PUT /draws/1
   # PUT /draws/1.json
   def update
-    @draw = Draw.find(params[:id])
+    @draw = current_user.draws.find(params[:id])
 
     respond_to do |format|
       if @draw.update_attributes(params[:draw])
@@ -72,7 +52,7 @@ class DrawsController < ApplicationController
   # DELETE /draws/1
   # DELETE /draws/1.json
   def destroy
-    @draw = Draw.find(params[:id])
+    @draw = current_user.draws.find(params[:id])
     @draw.destroy
 
     respond_to do |format|

@@ -6,4 +6,11 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery-ui
 //= require_tree .
+
+$(document).ready(function(){
+    if ($("#flash").length) {
+        setTimeout(function(){$("#flash").slideUp();}, 1000);
+    } 
+});

@@ -1,5 +1,3 @@
-<p id="notice"><%= notice %></p>
-
 <p>
   <b>Title:</b>
   <%= @draw.title %>
@@ -10,11 +8,14 @@
   <%= @draw.message %>
 </p>
 
-<p>
-  <b>User:</b>
-  <%= @draw.user_id %>
-</p>
+<div id='participants'>
+  <% if @draw.participants.count > 0 %>
+    <h2>Participants</h2>
+    <%= render @draw.participants %>
+  <% end %>
+</div>
 
+<%= render "participants/form" %>
 
 <%= link_to 'Edit', edit_draw_path(@draw) %> |
 <%= link_to 'Back', draws_path %>

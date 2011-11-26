@@ -1,0 +1,13 @@
+<% if (@participant.valid?) %>
+    $("#participants").append("<%= escape_javascript(render :partial => 'participants/participant', :locals => {:participant => @participant}) %>");
+    $("#participants div:last-child").effect("highlight", {}, 2000);
+    $("#participant_name").val("");
+    $("#participant_name").focus();
+    $("#participant_email").val("");
+    $("#participant_errors").html("");
+    $("#flash").text("Participant added");
+    $("#flash").slideDown();
+    setTimeout(function(){$("#flash").slideUp();}, 2000);
+<% else %>
+    $("#participant_errors").html("<%= escape_javascript(render :partial => 'participants/errors', :locals => {:participant => @participant}) %>");
+<% end %>
