@@ -1,18 +1,20 @@
 Santa::Application.routes.draw do
-  resources :picks
+  resources :picks, :only => :show
 
   resources :participants
 
-  resources :draws
-
-  resources :connections
+  resources :draws do 
+    member do 
+      post :make
+    end
+  end
 
   resources :users
 
   match "/login" => "users#new", :as => "login"
   match "/logout" => "users#destroy"
   match "/auth/:provider/callback" => "users#create"
-  root :to => 'draws#new'
+  root :to => 'draws#index'
 
   # See how all your routes lay out with "rake routes"
 

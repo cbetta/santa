@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  skip_before_filter :require_login
+  skip_before_filter :require_login, :only => [:new, :create]
   before_filter :redirect_if_logged_in, :only => [:new, :create]
 
   ### shows the login page ###

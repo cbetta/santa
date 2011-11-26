@@ -16,8 +16,8 @@
     <td><%= draw.message %></td>
     <td><%= draw.user_id %></td>
     <td><%= link_to 'Show', draw %></td>
-    <td><%= link_to 'Edit', edit_draw_path(draw) %></td>
-    <td><%= link_to 'Destroy', draw, confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= link_to 'Edit', edit_draw_path(draw) unless draw.drawn %></td>
+    <td><%= link_to 'Destroy', draw, confirm: 'Are you sure?', method: :delete  unless draw.drawn %></td>
   </tr>
 <% end %>
 </table>

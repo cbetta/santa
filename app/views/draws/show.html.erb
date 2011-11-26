@@ -8,14 +8,25 @@
   <%= @draw.message %>
 </p>
 
-<div id='participants'>
-  <% if @draw.participants.count > 0 %>
-    <h2>Participants</h2>
-    <%= render @draw.participants %>
-  <% end %>
-</div>
+<% unless @draw.drawn %>
+  <div id='participants'>
+    <% if @draw.participants.count > 0 %>
+      <h2>Participants</h2>
+      <%= render @draw.participants.order("name ASC") %>
+    <% end %>
+  </div>
+  
+  <%= render "participants/form" %>
+  
+<% else %>
+  <div id='picks'>
+    <h2>Picks</h2>
+    <%= render @draw.picks.order("id ASC") %>
+  </div>
+<% end %>
 
-<%= render "participants/form" %>
 
-<%= link_to 'Edit', edit_draw_path(@draw) %> |
-<%= link_to 'Back', draws_path %>
+<%= link_to 'Edit', edit_draw_path(@draw) unless @draw.drawn %> |
+<%= link_to 'Back', draws_path %> |
+<%= link_to 'Make a the draw', make_draw_path(@draw), method: :post, confirm: "Are you sure? This can not be undone. You can not add any more participants after this." unless @draw.drawn %>
+

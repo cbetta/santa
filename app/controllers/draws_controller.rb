@@ -12,24 +12,18 @@ class DrawsController < ApplicationController
     @draw = current_user.draws.new
   end
 
-  # GET /draws/1/edit
   def edit
     @draw = current_user.draws.find(params[:id])
+    prevent_if_drawn
   end
 
-  # POST /draws
-  # POST /draws.json
   def create
     @draw = current_user.draws.build(params[:draw])
 
-    respond_to do |format|
-      if @draw.save
-        format.html { redirect_to @draw, notice: 'Draw was successfully created.' }
-        format.json { render json: @draw, status: :created, location: @draw }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @draw.errors, status: :unprocessable_entity }
-      end
+    if @draw.save
+      redirect_to @draw, notice: 'Draw was successfully created.' 
+    else
+      render action: "new" 
     end
   end
 
@@ -37,6 +31,7 @@ class DrawsController < ApplicationController
   # PUT /draws/1.json
   def update
     @draw = current_user.draws.find(params[:id])
+    prevent_if_drawn
 
     respond_to do |format|
       if @draw.update_attributes(params[:draw])
@@ -53,11 +48,29 @@ class DrawsController < ApplicationController
   # DELETE /draws/1.json
   def destroy
     @draw = current_user.draws.find(params[:id])
+    prevent_if_drawn
+    
     @draw.destroy
 
     respond_to do |format|
       format.html { redirect_to draws_url }
       format.json { head :ok }
     end
+  end
+  
+  def make
+    @draw = current_user.draws.find(params[:id])
+    prevent_if_drawn
+        
+    @draw.make
+    # @draw.email_participants
+    
+    redirect_to @draw, notice: "The draw has been made and the participants have been emailed."
+  end
+  
+private 
+  
+  def prevent_if_drawn
+    redirect_to @draw, alert: "This draw has already been made." if @draw.drawn
   end
 end

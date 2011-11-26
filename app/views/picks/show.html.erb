@@ -1,25 +1,6 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <b>Picker:</b>
-  <%= @pick.picker_id %>
-</p>
-
-<p>
-  <b>Picked:</b>
-  <%= @pick.picked_id %>
-</p>
-
-<p>
-  <b>Hash:</b>
-  <%= @pick.hash %>
-</p>
-
-<p>
-  <b>Has checked:</b>
-  <%= @pick.has_checked %>
-</p>
-
-
-<%= link_to 'Edit', edit_pick_path(@pick) %> |
-<%= link_to 'Back', picks_path %>
+<div>
+  You: <%= @pick.picker.name %>
+</div>
+<div>
+  Pick: <%= @pick.picked.name %>
+</div>
