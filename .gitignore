@@ -16,3 +16,4 @@
 
 .rvmrc
 config/database.yml
+config/initializers/action_mailer.rb

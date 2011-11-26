@@ -63,7 +63,7 @@ class DrawsController < ApplicationController
     prevent_if_drawn
         
     @draw.make
-    # @draw.email_participants
+    @draw.email_participants
     
     redirect_to @draw, notice: "The draw has been made and the participants have been emailed."
   end

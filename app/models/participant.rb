@@ -8,4 +8,8 @@ class Participant < ActiveRecord::Base
   validates :name, :presence => true, uniqueness: {scope: :draw_id}
   validates :email, :presence => true, :email => true, uniqueness: {scope: :draw_id}
   validates :draw_id, :presence => true
+  
+  def email_pick
+    ParticipantMailer.pick_email(pick).deliver
+  end
 end

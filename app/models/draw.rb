@@ -9,6 +9,8 @@ class Draw < ActiveRecord::Base
   
   belongs_to :user
   
+  
+  ### undos a draw ###
   def undo
     self.picks.delete_all
     self.drawn = false
@@ -16,6 +18,7 @@ class Draw < ActiveRecord::Base
     save
   end
   
+  ### Makes a draw by matching participants ###
   def make
     unless drawn
       #start with 2 list of IDs
@@ -54,6 +57,8 @@ class Draw < ActiveRecord::Base
     end
   end
   
+  
+  ### Tests the making process ###
   def test
     10000.times do |i|
       puts "try #{i}"
@@ -65,8 +70,8 @@ class Draw < ActiveRecord::Base
     end
   end
 
-private
-
-
-  
+  ### emails all participants a link to their draw
+  def email_participants 
+    self.participants.each(&:email_pick)
+  end
 end
