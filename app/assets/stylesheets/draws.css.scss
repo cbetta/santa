@@ -53,8 +53,8 @@
     }
     
     .message {
-        font-size: 18px;
-        width: 700px;
+        font-size: 14px;
+        width: 500px;
         color: #333;
         line-height: 24px;
         margin-bottom: 10px;
@@ -77,6 +77,10 @@
             margin: 10px 15px;
             line-height: 20px;
             list-style: decimal outside;
+        }
+        
+        p {
+            margin-bottom: 10px;
         }
     }
 }
