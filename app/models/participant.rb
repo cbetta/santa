@@ -10,6 +10,6 @@ class Participant < ActiveRecord::Base
   validates :draw_id, :presence => true
   
   def email_pick
-    ParticipantMailer.pick_email(pick).deliver
+    ParticipantMailer.pick_email(pick.id).deliver
   end
 end

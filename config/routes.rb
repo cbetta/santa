@@ -1,4 +1,6 @@
 Santa::Application.routes.draw do
+  mount SecureResqueServer.new, :at => "/resque"
+  
   resources :picks, :only => :show
 
   resources :participants

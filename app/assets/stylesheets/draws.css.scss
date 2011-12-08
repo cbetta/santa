@@ -1,17 +1,20 @@
 // Place all the styles related to the Draws controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+$content-color: #fff;
+$header-color: #a90329;
 
 #draws, #picks, #users {
     h1 {
         font-family: 'Merienda One', cursive;
-        font-size: 26px;
-        margin-bottom: 10px;
+        font-size: 24px;
+        line-height: 1.1em;
+        margin: 24px 0px 12px 0px;
     }
     
     h2 {
         font-family: 'Merienda One', cursive;
-        font-size: 20px;
+        font-size: 18px;
         margin: 20px 0px 10px 0px;
     }
     
@@ -25,7 +28,7 @@
             border-bottom: 1px solid #ddd;
 
             &:nth-child(odd) {
-                background-color: #fafafa;
+                background-color: darken($content-color, 5%);
             }
             
             td {
@@ -53,34 +56,34 @@
     }
     
     .message {
-        font-size: 14px;
-        width: 500px;
-        color: #333;
-        line-height: 18px;
+        font-size: 16px;
+        width: 540px;
+        color: darken($content-color, 80%);
+        line-height: 24px;
         margin-bottom: 10px;
         
         h1 {
-            font-size: 20px;
+            font-size: 24px;
         }
         
         h2 {
-            font-size: 18px;
+            font-size: 20px;
         }
         
         ul {
             margin: 10px 15px;
-            line-height: 20px;
+            line-height: 24px;
             list-style: disc outside;
         }
         
         ol {
             margin: 10px 15px;
-            line-height: 20px;
+            line-height: 24px;
             list-style: decimal outside;
         }
         
         p {
-            margin-bottom: 10px;
+            margin-bottom: 12px;
         }
     }
 }

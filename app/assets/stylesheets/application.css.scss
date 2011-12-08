@@ -10,6 +10,12 @@
 */
 @import url(http://fonts.googleapis.com/css?family=Merienda+One);
 
+$content-color: #fff;
+$header-color: #a90329;
+$header-color2: darken($header-color, 5%);
+$header-color3: darken($header-color, 10%);
+$footer-color: rgb(183,173,112);
+
 body {
     background-color: rgb(213,206,166);
 }
@@ -58,21 +64,22 @@ a {
 }
 
 #header {
+    min-width: 960px;
     font-family: 'Merienda One', cursive;
     padding: 10px 0px 15px 0px;
-    background: #a90329; /* Old browsers */
-    background: -moz-linear-gradient(top,  #a90329 0%, #8f0222 44%, #6d0019 100%); /* FF3.6+ */
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#a90329), color-stop(44%,#8f0222), color-stop(100%,#6d0019)); /* Chrome,Safari4+ */
-    background: -webkit-linear-gradient(top,  #a90329 0%,#8f0222 44%,#6d0019 100%); /* Chrome10+,Safari5.1+ */
-    background: -o-linear-gradient(top,  #a90329 0%,#8f0222 44%,#6d0019 100%); /* Opera 11.10+ */
-    background: -ms-linear-gradient(top,  #a90329 0%,#8f0222 44%,#6d0019 100%); /* IE10+ */
-    background: linear-gradient(top,  #a90329 0%,#8f0222 44%,#6d0019 100%); /* W3C */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a90329', endColorstr='#6d0019',GradientType=0 ); /* IE6-9 */
+    background: $header-color; /* Old browsers */
+    background: -moz-linear-gradient(top,  $header-color 0%, $header-color2 44%, $header-color3 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,$header-color), color-stop(44%,$header-color2), color-stop(100%,$header-color3)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  $header-color 0%,$header-color2 44%,$header-color3 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  $header-color 0%,$header-color2 44%,$header-color3 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  $header-color 0%,$header-color2 44%,$header-color3 100%); /* IE10+ */
+    background: linear-gradient(top,  $header-color 0%,$header-color2 44%,$header-color3 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$header-color', endColorstr='$header-color3',GradientType=0 ); /* IE6-9 */
     border-bottom: 5px solid #ddd;
     
     
     a {
-        color: #fff;
+        color: lighten($header-color, 70%);
         font-size: 22px;
         text-decoration: none;
     }
@@ -90,21 +97,16 @@ a {
 }
 
 #content {
-    background: rgb(237,237,237); /* Old browsers */
-    background: -moz-linear-gradient(top,  rgba(237,237,237,1) 0%, rgba(246,246,246,1) 53%, rgba(255,255,255,1) 100%); /* FF3.6+ */
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(237,237,237,1)), color-stop(53%,rgba(246,246,246,1)), color-stop(100%,rgba(255,255,255,1))); /* Chrome,Safari4+ */
-    background: -webkit-linear-gradient(top,  rgba(237,237,237,1) 0%,rgba(246,246,246,1) 53%,rgba(255,255,255,1) 100%); /* Chrome10+,Safari5.1+ */
-    background: -o-linear-gradient(top,  rgba(237,237,237,1) 0%,rgba(246,246,246,1) 53%,rgba(255,255,255,1) 100%); /* Opera 11.10+ */
-    background: -ms-linear-gradient(top,  rgba(237,237,237,1) 0%,rgba(246,246,246,1) 53%,rgba(255,255,255,1) 100%); /* IE10+ */
-    background: linear-gradient(top,  rgba(237,237,237,1) 0%,rgba(246,246,246,1) 53%,rgba(255,255,255,1) 100%); /* W3C */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ededed', endColorstr='#ffffff',GradientType=0 ); /* IE6-9 */
+    min-width: 960px;
+    background: $content-color;
     font-size: 16px;
     padding: 40px 0px;
     font-family: Arial, sans-serif;
 }
 
 #footer {
-    background: rgb(183,173,112); /* Old browsers */
+    min-width: 960px;
+    background: $footer-color; /* Old browsers */
     background: -moz-linear-gradient(top,  rgba(183,173,112,1) 0%, rgba(201,193,144,1) 60%, rgba(213,206,166,1) 100%); /* FF3.6+ */
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(183,173,112,1)), color-stop(60%,rgba(201,193,144,1)), color-stop(100%,rgba(213,206,166,1))); /* Chrome,Safari4+ */
     background: -webkit-linear-gradient(top,  rgba(183,173,112,1) 0%,rgba(201,193,144,1) 60%,rgba(213,206,166,1) 100%); /* Chrome10+,Safari5.1+ */
@@ -115,11 +117,11 @@ a {
     border-top: 5px solid #ddd;
     min-height: 300px;
     font-family: Arial, sans-serif;
-    color: #fff;
+    color: lighten($footer-color, 30%);
     font-size: 13px;
     padding: 10px 0px;
     
     a {
-        color: #ddd;
+        color: lighten($footer-color, 40%);;
     }
 }

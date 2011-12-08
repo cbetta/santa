@@ -11,6 +11,10 @@ gem 'pg'
 gem 'omniauth-twitter'
 gem 'RedCloth'
 
+# resque background queues
+gem 'resque'
+gem 'resque_mailer'
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
