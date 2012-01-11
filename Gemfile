@@ -9,6 +9,8 @@ gem 'pg'
 
 #authentication
 gem 'omniauth-twitter'
+gem 'unicorn'
+gem 'capistrano'
 gem 'RedCloth'
 
 # resque background queues
