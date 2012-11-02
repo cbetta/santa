@@ -1,4 +1,4 @@
-== Secret Santa Picker
+# Secret Santa Picker
 
 This is an app that I seem to rebuild every year. It started as an app in plain PHP, then in Symfony, then in Rails, and now again in Rails3. Every year I build it and every year I do so in less time.
 
