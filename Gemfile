@@ -29,7 +29,6 @@ group :development do
   gem 'capistrano-unicorn'
   gem 'rvm-capistrano'
   gem 'capistrano-shared_file', require: nil
-  gem 'capistrano-resque'
 end
 
 group :test do
