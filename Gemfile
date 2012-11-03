@@ -25,6 +25,13 @@ end
 gem 'unicorn'
 gem 'jquery-rails'
 
+group :development do
+  gem 'capistrano-unicorn'
+  gem 'rvm-capistrano'
+  gem 'capistrano-shared_file', require: nil
+  gem 'capistrano-resque'
+end
+
 group :test do
   # Pretty printed test output
   gem 'turn', '~> 0.8.3', :require => false
