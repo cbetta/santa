@@ -15,7 +15,7 @@
 /tmp
 
 .rvmrc
-config/database.yml
+config/*.yml
 config/deploy.rb
 config/initializers/omniauth.rb
 config/initializers/secure_resque.rb
