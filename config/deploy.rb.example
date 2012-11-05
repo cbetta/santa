@@ -1,0 +1,58 @@
+set :application, 'santa'
+
+### DON'T EDIT BELOW THIS LINE ###
+
+# ssh setup
+default_run_options[:pty] = true
+ssh_options[:forward_agent] = true
+
+# rvm setup
+set :rvm_ruby_string, ""
+before 'deploy:setup', 'rvm:install_rvm'
+before 'deploy:setup', 'rvm:install_ruby'
+
+# server setup
+set :user, ""
+server "", :web, :db, :app, :resque_worker, :resque_scheduler, primary: true
+set :port, ""
+set :use_sudo, false
+
+# git setup
+set :scm, :git
+set :repository, "git@github.com:cbetta/#{application}.git"
+set :branch, "master"
+set :keep_releases, 5
+
+# deploy details
+set :deploy_to, "/var/www/#{application}.cgb.im/"
+set :shared_files, %w(config/database.yml config/unicorn config/initializers/omniauth.rb config/initializers/secure_resque.rb config/initializers/action_mailer.rb)
+set :upload_on_setup, %w(config/initializers/omniauth.rb config/initializers/secure_resque.rb config/initializers/action_mailer.rb)
+after "deploy:setup", "shared:upload_initial"
+
+# compile assets
+load 'deploy/assets'
+after "deploy", "resque:link_assets"
+
+# db migrations
+after "deploy", "deploy:migrate"
+
+# includes (keep here to prevent errors)
+require 'capistrano-unicorn'
+require "rvm/capistrano"
+require "bundler/capistrano"
+require 'capistrano/shared_file'
+
+# custom calls
+namespace :shared do
+  task :upload_initial,  :except => { :no_release => true }  do
+    upload_on_setup.each do |file|
+      upload(file, "#{deploy_to}shared/files/#{file}", via: :scp)
+    end
+  end
+end
+
+namespace :resque do
+  task :link_assets do
+    run "ln -nfs /var/www/#{application}.cgb.im/shared/bundle/ruby/1.9.1/gems/resque-1.23.0/lib/resque/server/public #{release_path}/public/resque"
+  end
+end
