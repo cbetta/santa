@@ -18,3 +18,4 @@
 config/database.yml
 config/deploy.rb
 config/initializers/omniauth.rb
+config/initializers/secure_resque.rb
