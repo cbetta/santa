@@ -26,7 +26,6 @@ gem 'unicorn'
 gem 'jquery-rails'
 
 group :development do
-  gem 'capistrano-unicorn'
   gem 'rvm-capistrano'
   gem 'capistrano-shared_file', require: nil
   gem 'capistrano-resque'

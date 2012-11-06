@@ -20,3 +20,4 @@ config/deploy.rb
 config/initializers/omniauth.rb
 config/initializers/secure_resque.rb
 config/initializers/action_mailer.rb
+config/monit/unicorn.conf
