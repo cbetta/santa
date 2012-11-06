@@ -10,9 +10,9 @@ gem 'capistrano'
 gem 'RedCloth'
 
 # resque background queues
-gem 'resque'
+gem 'resque', '1.23.0'
+gem 'resque-pool', '0.3.0'
 gem 'resque_mailer'
-gem 'resque-pool'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -27,8 +27,8 @@ gem 'unicorn'
 gem 'jquery-rails'
 
 group :development do
-  gem 'rvm-capistrano'
-  gem 'capistrano-shared_file', require: nil
+  gem 'rvm-capistrano', '1.2.7'
+  gem 'capistrano-shared_file', github: "cbetta/capistrano-shared_file", branch: "load_fix"
 end
 
 group :test do
