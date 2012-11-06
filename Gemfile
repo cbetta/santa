@@ -12,6 +12,7 @@ gem 'RedCloth'
 # resque background queues
 gem 'resque'
 gem 'resque_mailer'
+gem 'resque-pool'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -28,7 +29,6 @@ gem 'jquery-rails'
 group :development do
   gem 'rvm-capistrano'
   gem 'capistrano-shared_file', require: nil
-  gem 'capistrano-resque'
 end
 
 group :test do

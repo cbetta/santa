@@ -1,45 +1,15 @@
 require 'resque/tasks'
-
-# Start a worker with proper env vars and output redirection
-def run_worker(queue, count = 1)
-  puts "Starting #{count} worker(s) with QUEUE: #{queue}"
-  ops = {:pgroup => true, :err => [(Rails.root + "log/resque_err").to_s, "a"], 
-                          :out => [(Rails.root + "log/resque_stdout").to_s, "a"]}
-  env_vars = {"QUEUE" => queue.to_s}
-  count.times {
-    ## Using Kernel.spawn and Process.detach because regular system() call would
-    ## cause the processes to quit when capistrano finishes
-    pid = spawn(env_vars, "rake resque:work", ops)
-    Process.detach(pid)
-  }
+require 'resque/pool/tasks'
+# this task will get called before resque:pool:setup
+# and preload the rails environment in the pool manager
+task "resque:setup" => :environment do
+  # generic worker setup, e.g. Hoptoad for failed jobs
 end
-
-namespace :resque do
-  task :setup => :environment
-
-  desc "Restart running workers"
-  task :restart_workers => :environment do
-    Rake::Task['resque:stop_workers'].invoke
-    Rake::Task['resque:start_workers'].invoke
-  end
-  
-  desc "Quit running workers"
-  task :stop_workers => :environment do
-    pids = Array.new
-    Resque.workers.each do |worker|
-      pids.concat(worker.worker_pids)
-    end
-    if pids.empty?
-      puts "No workers to kill"
-    else
-      syscmd = "kill -s QUIT #{pids.join(' ')}"
-      puts "Running syscmd: #{syscmd}"
-      system(syscmd)
-    end
-  end
-  
-  desc "Start workers"
-  task :start_workers => :environment do
-    run_worker("*", 1)
+task "resque:pool:setup" do
+  # close any sockets or files in pool manager
+  ActiveRecord::Base.connection.disconnect!
+  # and re-open them in the resque worker parent
+  Resque::Pool.after_prefork do |job|
+    ActiveRecord::Base.establish_connection
   end
 end
