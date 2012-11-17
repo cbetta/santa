@@ -15,17 +15,25 @@
     <%= f.label :title, "Secret Santa name" %>
     <%= f.text_field :title, :placeholder => "e.g. The Smith's Family Secret Santa" %>
   </div>
+
+  <% if current_user.draws.count > 1 %>
+  <div class="field">
+    <%= f.label :previous_draw, "Use users from previous draw" %>
+    <%= f.select :previous_draw_id, current_user.draws.reject{|dr| dr.id.nil? }.map { |dr| [dr.title, dr.id] }, {:include_blank => 'None'} %>
+  </div>
+  <% end %>
+
   <div class="field">
     <%= f.label :message, "A little message or description" %>
     <%= f.text_area :message, :placeholder => "I've setup this secret santa, you are all invited..." %>
   </div>
-  
+
   <br/>
-  
+
   <div class="pull_right">
     <%= link_to "Cancel", root_url, :class => "button small delete"  if @draw.new_record?  %>
     <%= link_to "Cancel", @draw, :class => "button small delete"  unless @draw.new_record?  %>
-    
+
     <%= f.submit "Create and add participants", :class => "button small save" if @draw.new_record? %>
     <%= f.submit "Update", :class => "button small save"  unless @draw.new_record? %>
   </div>

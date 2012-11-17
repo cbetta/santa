@@ -1,4 +1,6 @@
 <tr id="participant<%= participant.id %>">
-  <td><strong><%= "#{participant.name} (#{participant.email})" %></strong></td>
+  <td>
+    <strong><%= "#{participant.name} (#{participant.email})" %></strong>
+  </td>
   <td class='narrow'><%= link_to "remove", participant, :class => "button tiny delete", method: :delete, remote: true, confirm: "Are you sure you want to remove this participant?" %></td>
 </tr>

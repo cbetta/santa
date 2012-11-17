@@ -1,8 +1,8 @@
-<%= link_to 'View all', draws_path, :class => "button small"  %> 
+<%= link_to 'View all', draws_path, :class => "button small"  %>
 
 <% unless @draw.drawn %>
   &nbsp;|&nbsp;
-  <%= link_to 'Edit draw', edit_draw_path(@draw), :class => "button edit small" %> 
+  <%= link_to 'Edit draw', edit_draw_path(@draw), :class => "button edit small" %>
   <%= link_to 'Delete draw', @draw, confirm: 'Are you sure?', :class => "button delete small", method: :delete %>
   <%= link_to 'Make the draw', make_draw_path(@draw),  :class => "button star small",  method: :post, confirm: "Are you sure? This can not be undone. You can not add any more participants after this." %>
 <% end %>
@@ -11,6 +11,12 @@
 <br/>
 
 <h1><%= @draw.title %></h1>
+
+<div class='message'>
+<% if @draw.previous_draw %>
+  Ensuring different pick than <%= link_to "previous draw", @draw.previous_draw %>
+<% end %>
+</div>
 
 <div class='message'>
   <%= RedCloth.new(@draw.message).to_html.html_safe %>
@@ -23,9 +29,9 @@
         <%= render @draw.participants.order("name ASC") %>
     <% end %>
 </table>
-  
+
   <%= render "participants/form" %>
-  
+
 <% else %>
 <h2>Status</h2>
 <table id='picks'>

@@ -1,5 +1,5 @@
 class Draw < ActiveRecord::Base
-  attr_accessible :title, :message
+  attr_accessible :title, :message, :previous_draw_id
 
   validates :title, :presence => true, :length => {minimum: 5, maximum: 255}
   validates :message, :presence => true, :length => {minimum: 10, maximum: 2000}
@@ -8,7 +8,9 @@ class Draw < ActiveRecord::Base
   has_many :picks, :dependent => :delete_all
 
   belongs_to :user
+  belongs_to :previous_draw, class_name: "Draw"
 
+  after_create :import_previous_participants
 
   ### undos a draw ###
   def undo
@@ -33,6 +35,7 @@ class Draw < ActiveRecord::Base
   			#limit the list of potential pickees
         allowed_pickees = Array.new(pickees)
         allowed_pickees.delete(picker)
+        allowed_pickees.delete(previous_pick_for(picker).picked_id)
         #get a random pickee
         pickee = allowed_pickees.shuffle!.pop
         #store the match
@@ -57,6 +60,9 @@ class Draw < ActiveRecord::Base
     end
   end
 
+  def previous_pick_for(picker)
+    previous_draw.picks.joins(:picker).where("participants.email = ?", Participant.find(picker).email).first
+  end
 
   ### Tests the making process ###
   def test
@@ -73,5 +79,14 @@ class Draw < ActiveRecord::Base
   ### emails all participants a link to their draw
   def email_participants
     self.participants.each(&:email_pick)
+  end
+
+  def import_previous_participants
+    participants = previous_draw.participants.map do |participant|
+      new_participant = participant.dup
+      new_participant.draw = self
+      new_participant.save!
+      new_participant
+    end
   end
 end

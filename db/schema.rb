@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121103121144) do
+ActiveRecord::Schema.define(:version => 20121117154658) do
 
   create_table "connections", :force => true do |t|
     t.integer  "user_id"
@@ -25,10 +25,11 @@ ActiveRecord::Schema.define(:version => 20121103121144) do
     t.string   "title"
     t.text     "message"
     t.integer  "user_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
     t.boolean  "drawn"
     t.datetime "drawn_on"
+    t.integer  "previous_draw_id"
   end
 
   create_table "participants", :force => true do |t|
