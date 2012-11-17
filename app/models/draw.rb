@@ -35,7 +35,7 @@ class Draw < ActiveRecord::Base
   			#limit the list of potential pickees
         allowed_pickees = Array.new(pickees)
         allowed_pickees.delete(picker)
-        allowed_pickees.delete(previous_pick_for(picker).picked_id)
+        allowed_pickees.delete(previous_pick_for(picker).picked_id) if previous_draw
         #get a random pickee
         pickee = allowed_pickees.shuffle!.pop
         #store the match
