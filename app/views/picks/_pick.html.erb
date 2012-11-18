@@ -1,4 +1,5 @@
 <tr>
-  <td><strong><%= pick.picker.name %></strong></td>
+  <td><strong><%= pick.picker.name %> (<%= pick.picked.name %>)</strong></td>
+
   <td><%= pick.has_checked ? "viewed their pick on #{pick.updated_at.strftime('%D %R')}": "has not yet viewed their draw"%></td>
 </tr>

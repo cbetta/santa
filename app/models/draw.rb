@@ -10,7 +10,7 @@ class Draw < ActiveRecord::Base
   belongs_to :user
   belongs_to :previous_draw, class_name: "Draw"
 
-  after_create :import_previous_participants
+  after_create :import_previous_participants, unless: -> draw { draw.previous_draw.nil? }
 
   ### undos a draw ###
   def undo
@@ -25,33 +25,17 @@ class Draw < ActiveRecord::Base
     unless drawn
       #start with 2 list of IDs
       pickers = participants.map(&:id)
-      pickees = participants.map(&:id)
-      selections = Hash.new
 
-      #go onto the last 2
-      while pickers.count > 2
-        #get a random picker
-  			picker = pickers.shuffle!.pop
-  			#limit the list of potential pickees
-        allowed_pickees = Array.new(pickees)
-        allowed_pickees.delete(picker)
-        allowed_pickees.delete(previous_pick_for(picker).picked_id) if previous_draw
-        #get a random pickee
-        pickee = allowed_pickees.shuffle!.pop
-        #store the match
-  			selections[picker] = pickee
-  			#delete the pickee from the allowed list
-  			pickees.delete(pickee)
-      end
+      pickee_permutations = participants.map(&:id).permutation.to_a
+      pickee_permutations.shuffle!
 
-      # the last 2 might only have 1 way they fit
-      pickers.reverse! if pickers[0] == pickees[0] || pickers[1] == pickees[1]
-      selections[pickers[0]] = pickees[0]
-      selections[pickers[1]] = pickees[1]
+      pickee_permutations.each do |pickees|
+        if valid_picks?(pickers, pickees)
+          store(pickers, pickees)
+          break
+        end
+        logger.error "###### NOT FOUND"
 
-      #store the picks
-      selections.each do |picker, pickee|
-        Pick.create!(:picker_id => picker, :picked_id => pickee, draw_id: id)
       end
 
       self.drawn = true
@@ -60,8 +44,30 @@ class Draw < ActiveRecord::Base
     end
   end
 
-  def previous_pick_for(picker)
-    previous_draw.picks.joins(:picker).where("participants.email = ?", Participant.find(picker).email).first
+  def valid_picks?(pickers, pickees)
+    pickers.each_with_index do |picker, i|
+      return false if picker == pickees[i]
+      return false if same_as_previous_pick(picker, pickees[i])
+    end
+    logger.error "###### FOUND"
+    true
+  end
+
+  def store(pickers, pickees)
+    pickers.each_with_index do |picker, i|
+      pickee = pickees[i]
+      Pick.create!(:picker_id => picker, :picked_id => pickee, draw_id: id)
+    end
+  end
+
+  def same_as_previous_pick(picker, pickee)
+    return false unless previous_draw
+
+    current_picker = Participant.find(picker)
+    current_pickee = Participant.find(pickee)
+
+    previous_picker = previous_draw.participants.where(email: current_picker.email).first
+    previous_picker.pick.picked.email == current_pickee.email
   end
 
   ### Tests the making process ###
@@ -72,13 +78,14 @@ class Draw < ActiveRecord::Base
       puts picks.inspect
       picks.each do |picker, pickee|
         raise "Invalid found" if picker == pickee
+        raise "Invalid found (previous)" if previous_pick_for(picker) == pickee
       end
     end
   end
 
   ### emails all participants a link to their draw
   def email_participants
-    self.participants.each(&:email_pick)
+    participants.each(&:email_pick)
   end
 
   def import_previous_participants

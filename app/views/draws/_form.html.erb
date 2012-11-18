@@ -16,7 +16,7 @@
     <%= f.text_field :title, :placeholder => "e.g. The Smith's Family Secret Santa" %>
   </div>
 
-  <% if current_user.draws.count > 1 %>
+  <% if current_user.draws.count > 0 %>
   <div class="field">
     <%= f.label :previous_draw, "Use users from previous draw" %>
     <%= f.select :previous_draw_id, current_user.draws.reject{|dr| dr.id.nil? }.map { |dr| [dr.title, dr.id] }, {:include_blank => 'None'} %>
