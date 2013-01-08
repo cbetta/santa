@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.2.9'
+gem 'rails', '3.2.11'
 gem 'pg'
 
 #authentication
@@ -29,6 +29,7 @@ gem 'jquery-rails'
 group :development do
   gem 'rvm-capistrano', '1.2.7'
   gem 'capistrano-shared_file', github: "cbetta/capistrano-shared_file", branch: "load_fix"
+  gem 'meta_request'
 end
 
 group :test do
